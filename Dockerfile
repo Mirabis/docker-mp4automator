@@ -2,7 +2,7 @@ FROM gliderlabs/alpine:3.3
 MAINTAINER Moreno Sint Hill (Mirabis) <info@mirabis.nl>
 
 ENV FFMPEG_VERSION=git \
-    PY_VER= 2.7.13 \
+    PY_VER= 2.7.13 
 
 WORKDIR /utils/ffmpeg
 
@@ -10,9 +10,8 @@ RUN \
   DIR=$(mktemp -d) && cd ${DIR} && \
   # ffmpeg dependencies
   apk add --update build-base curl nasm tar bzip2 git \
-  zlib-dev openssl-dev yasm-dev lame-dev libogg-dev x264-dev libvpx-dev libvorbis-dev fdk-aac faac x265-dev freetype-dev libass-dev libwebp-dev rtmpdump-dev libtheora-dev opus-dev && \
+  zlib-dev openssl-dev yasm-dev lame-dev libogg-dev x264-dev libvpx-dev libvorbis-dev fdk-aac faac x265-dev freetype-dev libass-dev libwebp-dev rtmpdump-dev libtheora-dev opus-dev python \
   # mp4 automator dependencies
-  python && \
   # configure mp4automator
   pip install requests requests[security] requests-cache babelfish guessit<2 subliminal stevedore python-dateutil deluge-client qt-faststart && \
   mkdir /config && \
