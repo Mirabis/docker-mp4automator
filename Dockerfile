@@ -14,9 +14,9 @@ RUN DIR=$(mktemp -d) && cd ${DIR} && \
   mkdir /config && \
   
   git clone https://github.com/mdhiggins/sickbeard_mp4_automator.git /config && \
-  sed -i -r 's/ffmpeg=.*/setting1=\/utils\/ffmpeg/' autoProcess.ini.sample && \
-  sed -i -r 's/ffprobe=.*/setting1=\/utils\/ffprobe/' autoProcess.ini.sample && \
-  cp --no-clobber autoProcess.ini.sample autoProcess.ini \
+  sed -i -r 's/ffmpeg=.*/setting1=\/utils\/ffmpeg/' /config/autoProcess.ini.sample && \
+  sed -i -r 's/ffprobe=.*/setting1=\/utils\/ffprobe/' /config/autoProcess.ini.sample && \
+  cp --no-clobber /config/autoProcess.ini.sample /config/autoProcess.ini && \
   
   git clone git://source.ffmpeg.org/ffmpeg.git ffmpeg-${FFMPEG_VERSION} && \
   cd ffmpeg-${FFMPEG_VERSION} && \
