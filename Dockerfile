@@ -7,20 +7,22 @@ ENV FFMPEG_VERSION=git \
 WORKDIR /utils/ffmpeg
 
 RUN DIR=$(mktemp -d) && cd ${DIR} && \
-  apk add --no-cache --update  build-base curl nasm tar bzip2 git \
-  zlib-dev openssl-dev yasm-dev lame-dev libogg-dev x264-dev libvpx-dev libvorbis-dev faac-dev fdk-aac-dev x265-dev freetype-dev libass-dev libwebp-dev rtmpdump-dev libtheora-dev opus-dev python py-pip && \
+  apk add --update --no-cache build-base curl nasm tar bzip2 git \
+  zlib-dev openssl-dev yasm-dev lame-dev libogg-dev x264-dev libvpx-dev libvorbis-dev faac-dev x265-dev freetype-dev libass-dev libwebp-dev rtmpdump-dev libtheora-dev opus-dev python py-pip && \
+  
   pip install requests requests[security] requests-cache babelfish guessit<2 subliminal stevedore python-dateutil deluge-client qt-faststart && \
-  mkdir /config && cd /config &&\
-  git clone https://github.com/mdhiggins/sickbeard_mp4_automator.git . && \
-  sed -i -r 's/ffmpeg=.*/setting1=\/utils\/ffmpeg/' autoProcess.ini.sample && \
-  sed -i -r 's/ffprobe=.*/setting1=\/utils\/ffprobe/' autoProcess.ini.sample && \
-  cp --no-clobber autoProcess.ini.sample autoProcess.ini && \  
-  cd ${DIR} && \
+  mkdir /config && \
+  
+  git clone https://github.com/mdhiggins/sickbeard_mp4_automator.git /config && \
+  sed -i -r 's/ffmpeg=.*/setting1=\/utils\/ffmpeg/' /config/autoProcess.ini.sample && \
+  sed -i -r 's/ffprobe=.*/setting1=\/utils\/ffprobe/' /config/autoProcess.ini.sample && \
+  cp --no-clobber /config/autoProcess.ini.sample /config/autoProcess.ini && \
+  
   git clone git://source.ffmpeg.org/ffmpeg.git ffmpeg-${FFMPEG_VERSION} && \
   cd ffmpeg-${FFMPEG_VERSION} && \
   ./configure --bindir="/utils" \
   --enable-version3 --enable-gpl --enable-nonfree --enable-small --enable-libmp3lame --enable-libx264 \
-  --enable-small --enable-libfaac --enable-libfdk-aac --enable-libx265 --enable-libvpx --enable-libtheora \
+  --enable-small --enable-libfaac --enable-libx265 --enable-libvpx --enable-libtheora \
   --enable-libvorbis --enable-libopus --enable-libass --enable-libwebp --enable-librtmp --enable-postproc \
   --enable-avresample --enable-libfreetype --enable-openssl --disable-debug && \
   make && \
