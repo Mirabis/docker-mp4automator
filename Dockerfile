@@ -2,7 +2,7 @@ FROM gliderlabs/alpine:3.3
 MAINTAINER Moreno Sint Hill (Mirabis) <info@mirabis.nl>
 
 ENV FFMPEG_VERSION=git \
-    PY_VER= 2.7.13 
+    PY_VER=2.7.13 
 
 WORKDIR /utils/ffmpeg
 
