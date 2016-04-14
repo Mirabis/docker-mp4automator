@@ -8,7 +8,7 @@ WORKDIR /utils/ffmpeg
 
 RUN DIR=$(mktemp -d) && cd ${DIR} && \
   apk add --update build-base curl nasm tar bzip2 git \
-  zlib-dev openssl-dev yasm-dev lame-dev libogg-dev x264-dev libvpx-dev libvorbis-dev fdk-aac-dev faac-dev x265-dev freetype-dev libass-dev libwebp-dev rtmpdump-dev libtheora-dev opus-dev python && \
+  zlib-dev openssl-dev yasm-dev lame-dev libogg-dev x264-dev libvpx-dev libvorbis-dev faac-dev x265-dev freetype-dev libass-dev libwebp-dev rtmpdump-dev libtheora-dev opus-dev python && \
   
   pip install requests requests[security] requests-cache babelfish guessit<2 subliminal stevedore python-dateutil deluge-client qt-faststart && \
   mkdir /config && \
@@ -22,7 +22,7 @@ RUN DIR=$(mktemp -d) && cd ${DIR} && \
   cd ffmpeg-${FFMPEG_VERSION} && \
   ./configure --bindir="/utils" \
   --enable-version3 --enable-gpl --enable-nonfree --enable-small --enable-libmp3lame --enable-libx264 \
-  --enable-small --enable-libfaac --enable-libfdk-aac --enable-libx265 --enable-libvpx --enable-libtheora \
+  --enable-small --enable-libfaac --enable-libx265 --enable-libvpx --enable-libtheora \
   --enable-libvorbis --enable-libopus --enable-libass --enable-libwebp --enable-librtmp --enable-postproc \
   --enable-avresample --enable-libfreetype --enable-openssl --disable-debug && \
   make && \
