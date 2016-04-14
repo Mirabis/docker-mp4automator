@@ -8,7 +8,7 @@ WORKDIR /utils/ffmpeg
 
 RUN DIR=$(mktemp -d) && cd ${DIR} && \
   apk add --update build-base curl nasm tar bzip2 git \
-  zlib-dev openssl-dev yasm-dev lame-dev libogg-dev x264-dev libvpx-dev libvorbis-dev fdk-aac faac x265-dev freetype-dev libass-dev libwebp-dev rtmpdump-dev libtheora-dev opus-dev python \
+  zlib-dev openssl-dev yasm-dev lame-dev libogg-dev x264-dev libvpx-dev libvorbis-dev fdk-aac faac x265-dev freetype-dev libass-dev libwebp-dev rtmpdump-dev libtheora-dev opus-dev python && \
   
   pip install requests requests[security] requests-cache babelfish guessit<2 subliminal stevedore python-dateutil deluge-client qt-faststart && \
   mkdir /config && \
