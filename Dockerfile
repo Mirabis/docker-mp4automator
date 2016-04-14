@@ -22,7 +22,7 @@ RUN DIR=$(mktemp -d) && cd ${DIR} && \
   cd ffmpeg-${FFMPEG_VERSION} && \
   ./configure --bindir="/utils" \
   --enable-version3 --enable-gpl --enable-nonfree --enable-small --enable-libmp3lame --enable-libx264 \
-  --enable-small --enable-libfaac --enable-libfdk_aac  --enable-libx265 --enable-libvpx --enable-libtheora \
+  --enable-small --enable-libfaac --enable-libfdk-aac --enable-libx265 --enable-libvpx --enable-libtheora \
   --enable-libvorbis --enable-libopus --enable-libass --enable-libwebp --enable-librtmp --enable-postproc \
   --enable-avresample --enable-libfreetype --enable-openssl --disable-debug && \
   make && \
