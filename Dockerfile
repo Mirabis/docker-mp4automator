@@ -36,39 +36,6 @@ RUN echo "@testing http://dl-3.alpinelinux.org/alpine/edge/testing/" >> /etc/apk
   && curl -fSL 'https://bootstrap.pypa.io/get-pip.py' | python2 \
   && hash -r \
   && pip install --no-cache-dir --upgrade pip setuptools requests requests[security] requests-cache babelfish guessit<2 subliminal qt-faststart \
-  
-  && DIR=$(mktemp -d) \
-  && cd ${DIR} \
-  
-  && curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxvf - -C . \
-  && cd ffmpeg-${FFMPEG_VERSION} \
-  && ./configure \
-		--enable-version3 \
-		--enable-gpl \
-		--enable-nonfree \
-		--enable-small \
-		--enable-libmp3lame \
-		--enable-libx264 \
-		--enable-libfaac \
-		--enable-libfdk-aac \
-		--enable-libx265 \
-		--enable-libvpx \
-		--enable-libtheora \
-		--enable-libvorbis \
-		--enable-libopus \
-		--enable-libass \
-		--enable-libwebp \
-		--enable-librtmp \
-		--enable-postproc \
-		--enable-avresample \
-		--enable-libfreetype \
-		--enable-openssl \
-		--disable-debug \
-  && make \
-  && make install \
-  && make distclean \
-  
-  && rm -rf ${DIR} \ 
   && apk del build-base curl tar bzip2 x264 openssl nasm \
   && rm -rf /var/cache/apk/*   
 
