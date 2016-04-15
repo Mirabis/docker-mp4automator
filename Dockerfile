@@ -32,9 +32,9 @@ RUN echo "@testing http://dl-3.alpinelinux.org/alpine/edge/testing/" >> /etc/apk
 		fdk-aac@testing fdk-aac-dev@testing \
 		libtheora-dev \
 		opus-dev \
-		python python python-dev \
-		py-pip py-setuptools \
-  && pip install --upgrade pip setuptools requests requests[security] requests-cache babelfish guessit<2 subliminal qt-faststart \
+		python \
+  && curl -fSL 'https://bootstrap.pypa.io/get-pip.py' | python2 \
+  && pip install --no-cache-dir --upgrade pip setuptools requests requests[security] requests-cache babelfish guessit<2 subliminal qt-faststart \
   
   && DIR=$(mktemp -d) \
   && cd ${DIR} \
