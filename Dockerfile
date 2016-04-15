@@ -7,8 +7,9 @@ ENV FFMPEG_VERSION=3.0.1 \
 WORKDIR /tmp/ffmpeg
 
 RUN apk add --update --no-cache build-base curl nasm tar bzip2 git \
-  zlib-dev openssl-dev yasm-dev lame-dev libogg-dev x264-dev libvpx-dev libvorbis-dev faac-dev x265-dev freetype-dev libass-dev libwebp-dev rtmpdump-dev libtheora-dev opus-dev python py-pip && \
-  pip install requests requests[security] requests-cache babelfish guessit<2 subliminal stevedore python-dateutil deluge-client qt-faststart && \
+  zlib-dev openssl-dev yasm-dev lame-dev libogg-dev x264-dev libvpx-dev libvorbis-dev faac-dev x265-dev freetype-dev libass-dev libwebp-dev rtmpdump-dev \
+  libtheora-dev opus-dev python-dev py-pip && \
+  pip install requests requests[security] requests-cache babelfish guessit<2 subliminal qt-faststart && \
  
   DIR=$(mktemp -d) && cd ${DIR} && \
   curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxvf - -C . && \
@@ -21,10 +22,9 @@ RUN apk add --update --no-cache build-base curl nasm tar bzip2 git \
   make && \
   make install && \
   make distclean && \
-  rm -rf ${DIR} && \  
-  
+  rm -rf ${DIR} && \    
   apk del build-base curl tar bzip2 git x264 openssl nasm && rm -rf /var/cache/apk/*
 
 VOLUME ["/config"]
 
-ENTRYPOINT ["manual.py","-h"]
+ENTRYPOINT ["ffmpeg"]
