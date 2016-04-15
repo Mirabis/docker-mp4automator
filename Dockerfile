@@ -73,9 +73,6 @@ RUN echo "@testing http://dl-3.alpinelinux.org/alpine/edge/testing/" >> /etc/apk
   
   && mkdir /config \
   && git clone https://github.com/mdhiggins/sickbeard_mp4_automator.git /config \
-  && sed -i -r 's/ffmpeg=.*/ffmpeg=\/tmp\/ffmpeg\/ffmpeg/' /config/autoProcess.ini.sample \
-  && sed -i -r 's/ffprobe=.*/ffprobe=\/tmp\/ffmpeg\/ffprobe/' /config/autoProcess.ini.sample \
-  && cp --no-clobber /config/autoProcess.ini.sample /config/autoProcess.ini 2>>/dev/null
 
 VOLUME ["/config"]
 
