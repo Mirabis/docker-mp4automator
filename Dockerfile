@@ -9,7 +9,6 @@ RUN apk --no-cache add build-base curl nasm tar bzip2 \
   zlib-dev openssl-dev yasm-dev lame-dev libogg-dev x264-dev libvpx-dev libvorbis-dev x265-dev freetype-dev libass-dev libwebp-dev rtmpdump-dev faac-dev libtheora-dev opus-dev python python-dev py-setuptools py-pip git \
   
   && apk add fdk-aac-dev --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted \
-  && pip install requests requests[security] requests-cache babelfish guessit<2 subliminal qt-faststart \
   
   && DIR=$(mktemp -d) \
   && cd ${DIR} \
