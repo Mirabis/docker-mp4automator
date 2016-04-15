@@ -37,7 +37,6 @@ RUN echo "@testing http://dl-3.alpinelinux.org/alpine/edge/testing/" >> /etc/apk
   && hash -r \
   && pip install --no-cache-dir --upgrade pip setuptools requests requests[security] requests-cache babelfish guessit<2 subliminal qt-faststart \
   && apk del build-base curl tar bzip2 x264 openssl nasm \
-  && rm -rf /var/cache/apk/*   
 
 WORKDIR /config
 
