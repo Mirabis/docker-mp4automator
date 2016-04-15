@@ -6,16 +6,35 @@ ENV FFMPEG_VERSION=3.0.1
 WORKDIR /tmp/ffmpeg
 
 RUN echo "@testing http://dl-3.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories \
-  && apk-install build-base curl nasm tar bzip2 zlib-dev openssl-dev yasm-dev lame-dev libogg-dev x264-dev libvpx-dev libvorbis-dev x265-dev freetype-dev libass-dev libwebp-dev rtmpdump-dev faac faac-dev \
-  fdk-aac@testing fdk-aac-dev@testing libtheora-dev opus-dev python python python-dev py-pip py-setuptools git \
-  
-  && ln -sf usr/bin/easy_install-2.7 /usr/bin/easy_install \
-  && ln -sf usr/bin/python2.7 /usr/bin/python \
-  && ln -sf usr/bin/python2.7-config /usr/bin/python-config \
-  && ln -sf usr/bin/pip2.7 /usr/bin/pip \
-  
-  && /usr/bin/pip install --upgrade requests requests[security] requests-cache babelfish guessit<2 subliminal qt-faststart
-  && apk add fdk-aac-dev --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted \
+  && apk-install \
+		musl \
+		build-base \
+		bash \
+		curl \
+		git \
+		nasm \
+		tar \
+		bzip2 \
+		zlib-dev \
+		openssl-dev \
+		yasm-dev \
+		lame-dev \
+		libogg-dev \
+		x264-dev \
+		libvpx-dev \
+		libvorbis-dev \
+		x265-dev \
+		freetype-dev \
+		libass-dev \
+		libwebp-dev \
+		rtmpdump-dev \
+		faac faac-dev \
+		fdk-aac@testing fdk-aac-dev@testing \
+		libtheora-dev \
+		opus-dev \
+		python python python-dev \
+		py-pip py-setuptools \
+  && pip install --upgrade pip setuptools requests requests[security] requests-cache babelfish guessit<2 subliminal qt-faststart \
   
   && DIR=$(mktemp -d) \
   && cd ${DIR} \
@@ -23,13 +42,34 @@ RUN echo "@testing http://dl-3.alpinelinux.org/alpine/edge/testing/" >> /etc/apk
   && curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxvf - -C . \
   && cd ffmpeg-${FFMPEG_VERSION} \
   && ./configure \
-  --enable-version3 --enable-gpl --enable-nonfree --enable-small --enable-libmp3lame --enable-libx264 --enable-small --enable-libfaac --enable-libfdk-aac --enable-libx265 --enable-libvpx --enable-libtheora --enable-libvorbis --enable-libopus --enable-libass --enable-libwebp --enable-librtmp --enable-postproc --enable-avresample --enable-libfreetype --enable-openssl --disable-debug \
+		--enable-version3 \
+		--enable-gpl \
+		--enable-nonfree \
+		--enable-small \
+		--enable-libmp3lame \
+		--enable-libx264 \
+		--enable-libfaac \
+		--enable-libfdk-aac \
+		--enable-libx265 \
+		--enable-libvpx \
+		--enable-libtheora \
+		--enable-libvorbis \
+		--enable-libopus \
+		--enable-libass \
+		--enable-libwebp \
+		--enable-librtmp \
+		--enable-postproc \
+		--enable-avresample \
+		--enable-libfreetype \
+		--enable-openssl \
+		--disable-debug \
   && make \
   && make install \
   && make distclean \
   
   && rm -rf ${DIR} \ 
-  && apk del build-base curl tar bzip2 git x264 openssl nasm  && rm -rf /var/cache/apk/* \
+  && apk del build-base curl tar bzip2 x264 openssl nasm \
+  && rm -rf /var/cache/apk/* \
   
   && mkdir /config \
   && git clone https://github.com/mdhiggins/sickbeard_mp4_automator.git /config \
