@@ -7,8 +7,8 @@ WORKDIR /tmp/ffmpeg
 
 RUN apk-install build-base curl nasm tar bzip2 \
   zlib-dev openssl-dev yasm-dev lame-dev libogg-dev x264-dev libvpx-dev libvorbis-dev x265-dev freetype-dev libass-dev libwebp-dev rtmpdump-dev faac-dev libtheora-dev opus-dev python python git \
-  && python -m ensurepip \
-  && pip install --upgrade pip setuptools requests requests[security] requests-cache babelfish guessit<2 subliminal qt-faststart
+  && python -m ensurepip --upgrade\
+  && pip install --upgrade pip setuptools requests requests-cache babelfish guessit<2 subliminal qt-faststart
   && apk add fdk-aac-dev --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted \
   
   && DIR=$(mktemp -d) \
