@@ -21,8 +21,8 @@ RUN apk --no-cache add build-base curl nasm tar bzip2 \
   && make install \
   && make distclean \
   
-  && rm -rf ${DIR} && \ 
-  && apk del build-base curl tar bzip2 git x264 openssl nasm  && rm -rf /var/cache/apk/* && \
+  && rm -rf ${DIR} \ 
+  && apk del build-base curl tar bzip2 git x264 openssl nasm  && rm -rf /var/cache/apk/* \
   
   && mkdir /config \
   && git clone https://github.com/mdhiggins/sickbeard_mp4_automator.git /config \
