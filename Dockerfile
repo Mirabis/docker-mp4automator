@@ -35,7 +35,7 @@ RUN echo "@testing http://dl-3.alpinelinux.org/alpine/edge/testing/" >> /etc/apk
 		python \
   && curl -fSL 'https://bootstrap.pypa.io/get-pip.py' | python2 \
   && hash -r \
-  && pip install --no-cache-dir --upgrade pip setuptools \
+  && pip install --no-cache-dir --upgrade pip setuptools requests requests[security] requests-cache babelfish guessit<2 subliminal qt-faststart \
   
   && DIR=$(mktemp -d) \
   && cd ${DIR} \
@@ -70,18 +70,17 @@ RUN echo "@testing http://dl-3.alpinelinux.org/alpine/edge/testing/" >> /etc/apk
   
   && rm -rf ${DIR} \ 
   && apk del build-base curl tar bzip2 x264 openssl nasm \
-  && rm -rf /var/cache/apk/* 
-  
-RUN mkdir /config \
-  && cd /config \
-  && git clone https://github.com/mdhiggins/sickbeard_mp4_automator.git . \
-  && sed -i -r 's/ffmpeg=.*/ffmpeg=\/tmp\/ffmpeg\/ffmpeg/' autoProcess.ini.sample \
-  && sed -i -r 's/ffprobe=.*/ffprobe=\/tmp\/ffmpeg\/ffprobe/' autoProcess.ini.sample \
+  && rm -rf /var/cache/apk/*   
+
+WORKDIR /config
+
+RUN git clone https://github.com/mdhiggins/sickbeard_mp4_automator.git . \
+  && sed -i -r 's;^ffmpeg=.*;ffmpeg=/tmp/ffmpeg/ffmpeg;' autoProcess.ini.sample \
+  && sed -i -r 's;^ffprobe=.*;ffprobe=/tmp/ffmpeg/ffprobe;' autoProcess.ini.sample \
   && cp --no-clobber autoProcess.ini.sample autoProcess.ini 2>>/dev/null \
-  && pip install --no-cache-dir --upgrade requests requests[security] requests-cache babelfish guessit<2 subliminal qt-faststart
 
 VOLUME ["/config"]
 
-ENTRYPOINT ["ffmpeg"]
+ENTRYPOINT ["/tmp/ffmpeg/ffmpeg"]
 
 
