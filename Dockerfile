@@ -48,6 +48,6 @@ RUN git clone https://github.com/mdhiggins/sickbeard_mp4_automator.git . \
 
 VOLUME ["/config"]
 
-ENTRYPOINT ["/tmp/ffmpeg/ffmpeg"]
+#ENTRYPOINT ["/tmp/ffmpeg/ffmpeg"]
 
 
