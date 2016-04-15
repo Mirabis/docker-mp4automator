@@ -11,7 +11,8 @@ RUN apk --no-cache add build-base curl nasm tar bzip2 \
   apk add fdk-aac-dev --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted && \
   pip install requests requests[security] requests-cache babelfish guessit<2 subliminal qt-faststart && \
   
-  DIR=$(mktemp -d) && cd ${DIR} && \
+  mkdir /config /workdir && \
+  cd /workdir && \
   
   curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxvf - -C . && \
   cd ffmpeg-${FFMPEG_VERSION} && \
@@ -21,7 +22,7 @@ RUN apk --no-cache add build-base curl nasm tar bzip2 \
   make install && \
   make distclean && \
   
-  rm -rf ${DIR} && \    
+  rm -rf /workdir && \    
   apk del build-base curl tar bzip2 git x264 openssl nasm 
 
 VOLUME ["/config"]
