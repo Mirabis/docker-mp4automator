@@ -34,7 +34,8 @@ RUN echo "@testing http://dl-3.alpinelinux.org/alpine/edge/testing/" >> /etc/apk
 		opus-dev \
 		python \
   && curl -fSL 'https://bootstrap.pypa.io/get-pip.py' | python2 \
-  && /usr/local/bin/pip-2.7 install --no-cache-dir --upgrade pip setuptools requests requests[security] requests-cache babelfish guessit<2 subliminal qt-faststart \
+  && hash -r \
+  && pip install --no-cache-dir --upgrade pip setuptools \
   
   && DIR=$(mktemp -d) \
   && cd ${DIR} \
