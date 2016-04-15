@@ -22,13 +22,6 @@ RUN apk add --update --no-cache build-base curl nasm tar bzip2 git \
   make install && \
   make distclean && \
   rm -rf ${DIR} && \  
-  mkdir /config && \
-
-  cd /config && \
-  git clone https://github.com/mdhiggins/sickbeard_mp4_automator.git . && \
-  sed -i -r 's/ffmpeg=.*/setting1=\/utils\/ffmpeg/' autoProcess.ini.sample && \
-  sed -i -r 's/ffprobe=.*/setting1=\/utils\/ffprobe/' autoProcess.ini.sample && \
-  cp --no-clobber autoProcess.ini.sample autoProcess.ini && \
   
   apk del build-base curl tar bzip2 git x264 openssl nasm && rm -rf /var/cache/apk/*
 
