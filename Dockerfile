@@ -11,12 +11,13 @@ RUN apk --no-cache add build-base curl nasm tar bzip2 \
   && apk add fdk-aac-dev --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted \
   && pip install requests requests[security] requests-cache babelfish guessit<2 subliminal qt-faststart \
   
-  && DIR=$(mktemp -d) && cd ${DIR} \
+  && DIR=$(mktemp -d) \
+  && cd ${DIR} \
   
   && curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxvf - -C . \
   && cd ffmpeg-${FFMPEG_VERSION} \
   && ./configure \
-  --enable-version3 --enable-gpl --enable-nonfree --enable-small --enable-libmp3lame --enable-libx264 --enable-small --enable-libfaac --enable-libx265 --enable-libvpx --enable-libtheora --enable-libvorbis --enable-libopus --enable-libass --enable-libwebp --enable-librtmp --enable-postproc --enable-avresample --enable-libfreetype --enable-openssl --disable-debug && \
+  --enable-version3 --enable-gpl --enable-nonfree --enable-small --enable-libmp3lame --enable-libx264 --enable-small --enable-libfaac --enable-libx265 --enable-libvpx --enable-libtheora --enable-libvorbis --enable-libopus --enable-libass --enable-libwebp --enable-librtmp --enable-postproc --enable-avresample --enable-libfreetype --enable-openssl --disable-debug \
   && make \
   && make install \
   && make distclean \
