@@ -6,7 +6,7 @@ ENV FFMPEG_VERSION=3.0.1
 WORKDIR /tmp/ffmpeg
 
 RUN echo "@testing http://dl-3.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories \
-  && apk-install \
+  && apk add --no-cache \
 		musl \
 		build-base \
 		bash \
@@ -68,8 +68,7 @@ RUN echo "@testing http://dl-3.alpinelinux.org/alpine/edge/testing/" >> /etc/apk
   && make distclean \
   
   && rm -rf ${DIR} \ 
-  && apk del build-base curl tar bzip2 x264 openssl nasm \
-  && rm -rf /var/cache/apk/*   
+  && apk del build-base curl tar bzip2 x264 openssl nasm 
 
 WORKDIR /config
 
