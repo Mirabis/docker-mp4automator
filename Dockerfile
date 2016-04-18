@@ -35,7 +35,7 @@ RUN echo "@testing http://dl-3.alpinelinux.org/alpine/edge/testing/" >> /etc/apk
 		python \
   && curl -fSL 'https://bootstrap.pypa.io/get-pip.py' | python2 \
   && hash -r \
-  && pip install --no-cache-dir --upgrade pip setuptools requests requests[security] requests-cache babelfish subliminal qt-faststart \
+  && pip install --no-cache-dir --upgrade pip setuptools requests requests[security] requests-cache babelfish subliminal qtfaststart guessit==1.0.3\
   
   && DIR=$(mktemp -d) \  
   && cd ${DIR} \  
